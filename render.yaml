@@ -1,0 +1,17 @@
+# Render.com Blueprints — ShortcutSistem + Band MCP Server
+# Deploy: https://render.com/blueprints → "Connect a repository"
+
+services:
+  - type: web
+    name: shortcutsistem-band-mcp
+    env: python
+    region: singapore
+    buildCommand: pip install uv && uv sync
+    startCommand: uv run python server.py
+    envVars:
+      - key: BAND_API_KEY
+        sync: false
+      - key: PORT
+        value: "8000"
+      - key: UV_LINK_MODE
+        value: copy

@@ -1,0 +1,42 @@
+[project]
+name = "shortcutsistem-band-mcp"
+version = "0.1.0"
+description = "Combined MCP server: Band platform control + ShortcutSistem tools for Indonesian UMKM"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # Band SDK stack — must have band-client-rest explicitly
+    # band-sdk pulls in band-client-rest as a dep, but we list it
+    # explicitly to pin the version and avoid import errors.
+    "band-client-rest==0.0.14",
+    "band-sdk>=1.1.0",
+
+    # FastMCP server
+    "mcp>=1.0.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+
+    # HTTP client for ShortcutSistem API calls
+    "httpx>=0.27.0",
+
+    # Utilities
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "httpx>=0.27.0",
+]
+
+[tool.uv]
+# uv is used by Railway for builds
+# Pin to highest resolution to catch dependency conflicts early
+pip-resolution = "highest"
+
+# Required for Railway deployment
+[tool.uv.pip]
+resolution = "highest"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
